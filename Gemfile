@@ -39,6 +39,7 @@ end
 group :test do
   gem 'selenium-webdriver'
   gem 'capybara'
+  gem 'factory_girl_rails', '4.2.1'
 end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
@@ -52,6 +53,8 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'bootstrap-sass', '3.3.7'
+gem 'bootstrap-sass', '3.3.6'
 
 gem 'bcrypt-ruby'
+
+gem 'sprockets-rails'
