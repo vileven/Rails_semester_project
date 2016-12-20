@@ -56,6 +56,18 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'bootstrap-sass', '3.3.6'
 
+# cryptograph coockie token
 gem 'bcrypt-ruby'
 
 gem 'sprockets-rails'
+
+# uploads avatars
+gem 'carrierwave'
+gem 'mini_magick'
+
+# DataBase generate
+gem 'faker'
+
+# Paginator
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'

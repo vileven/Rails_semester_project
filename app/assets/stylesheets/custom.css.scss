@@ -6,6 +6,7 @@
 
 $grayMediumLight: #eaeaea;
 
+
 @mixin box_sizing {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -337,3 +338,20 @@ a:hover {
 input {
   height: auto !important;
 }
+
+.am-user-menu li a{
+  color: #555;
+}
+
+.shadow-container {
+  margin-top: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
+  padding: 10px;
+}
+
+#sign-up-btn-curl {
+  text-decoration: underline;
+}
+

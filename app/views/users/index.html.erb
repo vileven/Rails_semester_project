@@ -1,0 +1,13 @@
+<% provide(:title, 'All users') %>
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'custom/paginate' %>
+<% end %>
+<h1>All users</h1>
+<%= will_paginate %>
+<% @users.each do |user| %>
+    <div class="shadow-container">
+      <%= render user %>
+    </div>
+<% end %>
+
+<%= will_paginate %>
