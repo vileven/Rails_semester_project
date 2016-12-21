@@ -12,6 +12,11 @@
           <a href="<%= user_path(question.author) %>"><span><%= question.author.name %></span></a>
         </div>
         <div class="am-qss-body col-sm-9">
+          <% if current_user.admin? %>
+              <%= link_to "| delete", question, method: :delete,
+                          data: { confirm: "You sure?" } ,
+                          style: "float: right;"%>
+          <% end %>
           <h3><%= link_to question.title, question_path(question) %></h3>
           <p><%= short_qs_content(question.content) %></p>
           <div class="timestamp1">

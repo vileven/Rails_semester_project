@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
-  before_action :signed_in_user, only: [:create, :destroy, :new]
+  before_action :signed_in_user, only: [:create, :new]
+  before_action :admin_user,     only: :destroy
 
   def create
     @question = current_user.questions.build(question_params)
@@ -12,6 +13,9 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
+    Question.find(params[:id]).destroy
+    flash[:success] = "Question deleted."
+    redirect_to questions_url
   end
 
   def show
@@ -30,5 +34,9 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :content)
+  end
+
+  def admin_user
+    redirect_to(root_url) unless current_user.admin?
   end
 end

@@ -3,10 +3,10 @@
     <%= image_tag(user.avatar.medium, class: 'img-circle')  %>
   </div>
   <div class="col-md-9">
-    <%= link_to user.name, user_path(user) %>
     <% if current_user.admin? && !current_user?(user) %>
-        | <%= link_to "delete", user, method: :delete,
-                      data: { confirm: "You sure?" } %>
+        <%= link_to "delete", user, method: :delete,
+                      data: { confirm: "You sure?" }, style: "float: right; " %>
     <% end %>
+    <h3><%= link_to user.name, user_path(user) %></h3>
   </div>
 </div>
