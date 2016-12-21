@@ -16,5 +16,11 @@ FactoryGirl.define do
     content "Lorem ipsum"
     association :author, factory: :user
   end
+
+  factory :answer do
+    content "Lorem ipsum"
+    association :answerer, factory: :user
+    association :question, factory: :question
+  end
 end
 

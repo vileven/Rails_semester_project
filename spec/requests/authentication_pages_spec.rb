@@ -79,10 +79,10 @@ describe "Authentication" do
         specify { expect(response).to redirect_to(signin_path) }
       end
 
-      describe "submitting to the destroy action" do
-        before { delete question_path(FactoryGirl.create(:question)) }
-        specify { expect(response).to redirect_to(signin_path) }
-      end
+      # describe "submitting to the destroy action" do
+      #   before { delete question_path(FactoryGirl.create(:question)) }
+      #   specify { expect(response).to redirect_to(signin_path) }
+      # end
     end
   end
 

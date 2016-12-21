@@ -126,7 +126,7 @@ describe User do
     its(:remember_token) { should_not be_blank }
   end
 
-  describe "que associations" do
+  describe "question associations" do
 
     before { @user.save }
     let!(:older_question) do
@@ -146,6 +146,34 @@ describe User do
       expect(questions).not_to be_empty
       questions.each do |question|
         expect(Question.where(id: question.id)).to be_empty
+      end
+    end
+  end
+
+  describe "answer assosiation" do
+    before { @user.save }
+    let!(:an_question) do
+      FactoryGirl.create(:question, author: @user)
+    end
+
+    let!(:older_answer) do
+      FactoryGirl.create(:answer, answerer: @user, question: an_question, created_at: 1.day.ago)
+    end
+    let!(:newer_answer) do
+      FactoryGirl.create(:answer, answerer: @user, question: an_question, created_at: 1.hour.ago)
+    end
+
+    it "should have the right questions in the right order" do
+      expect(@user.answers.to_a).to eq [newer_answer, older_answer]
+    end
+
+
+    it "should destroy associated answers" do
+      answers = @user.answers.to_a
+      @user.destroy
+      expect(answers).not_to be_empty
+      answers.each do |answers|
+        expect(Answer.where(id: answers.id)).to be_empty
       end
     end
   end

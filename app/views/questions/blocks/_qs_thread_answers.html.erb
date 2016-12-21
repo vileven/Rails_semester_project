@@ -1,0 +1,39 @@
+<% if @question.answers.any? %>
+  <div class="am-answers shadow-container col-xs-12">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#">New</a></li>
+      <li><a href="#">Popular</a></li>
+    </ul>
+    <div class="scroll-container" id="am-ajax">
+      <% @question.answers.each do |answer| %>
+        <div class="row">
+          <div class="am-answer">
+            <div class="col-xs-1">
+              <div class="am-answer-rating">
+                <a href="#" ><span class="glyphicon glyphicon-chevron-up"></span></a>
+                   <span><%= answer.rating %></span>
+                <a href="#" ><span class="glyphicon glyphicon-chevron-down"></span></a>
+              </div>
+            </div>
+            <div class="am-answer-user-info col-sm-2">
+              <div>
+                <%= image_tag(answer.answerer.avatar.small, class: 'img-circle')  %>
+              </div>
+              <a href="<%= user_path(answer.answerer) %>"><span><%= answer.answerer.name %></span></a>
+            </div>
+            <div class="col-sm-9 am-answer-body">
+              <p>
+                <%= answer.content %>
+              </p>
+              <div class="answer-timestamp">
+                Posted <%= time_ago_in_words(answer.created_at) %> ago.
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<%= render 'shared/answer_form' %>

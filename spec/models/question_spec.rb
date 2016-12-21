@@ -10,6 +10,7 @@ describe Question do
   it { should respond_to(:content) }
   it { should respond_to(:author_id) }
   it { should respond_to(:title) }
+  it { should respond_to(:answers) }
 
   describe "when author_id is not present" do
     before { @question.author_id = nil }

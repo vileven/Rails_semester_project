@@ -20,6 +20,7 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
+    @answer = Answer.new
   end
 
   def index
@@ -37,6 +38,6 @@ class QuestionsController < ApplicationController
   end
 
   def admin_user
-    redirect_to(root_url) unless current_user.admin?
+    redirect_to(signin_path) unless current_user.admin?
   end
 end

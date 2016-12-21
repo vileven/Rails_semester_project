@@ -1,0 +1,21 @@
+  <%= form_for(@answer, remote: true, method: 'post',
+               :html => {class: "form-horizontal", id: "answer_form"}) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.hidden_field :question_id, value: @question.id %>
+
+      <div class="form-group">
+        <div class="col-sm-9 controls" id="am-answer-formfield">
+          <%= f.text_area :content, :class => "form-control",
+                          placeholder: "Your answer", rows: "11", id: "answer-content-field" %>
+        </div>
+      </div>
+
+
+
+      <div class="form-group">
+        <div class="col-sm-3">
+          <%= f.submit "Answer", class: "btn btn-lg btn-default am-btn", id: "btn-reg" %>
+        </div>
+      </div>
+  <% end %>

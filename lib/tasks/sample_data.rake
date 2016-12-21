@@ -35,8 +35,14 @@ namespace :db do
         content = Faker::Lorem.paragraph(5)
         user.questions.create!(title: title, content: content)
       end
-
     end
 
+    for question in Question.all.limit(20) do
+      users = User.all.limit(20).to_a
+      10.times do
+        content = Faker::Lorem.paragraph(5)
+        question.answers.create!(content: content, answerer: users.shuffle[0])
+      end
+    end
   end
 end
