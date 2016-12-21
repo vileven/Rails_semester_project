@@ -1,3 +1,22 @@
 <% provide(:title, @user.name) %>
-<h1><%= @user.name %></h1>
-<%= image_tag(@user.avatar.large, class: 'img-circle') if @user.avatar? %>
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'custom/paginate' %>
+<% end %>
+<div class="row">
+  <div class="col-md-5">
+    <div class="am-user-info">
+      <%= image_tag(@user.avatar.large, class: 'img-circle') if @user.avatar? %>
+      <a href="<%= user_path(@user) %>"><h1><%= @user.name %></h1></a>
+    </div>
+    <div style="height: 265px;"></div>
+  </div>
+  <div class="col-md-7 am-user-activity">
+    <% if @user.questions.any? %>
+      <div class="shadow-container am-user-activity-qss">
+          <h3>Questions (<%= @user.questions.count %>)</h3>
+            <%= render @questions %>
+          <%= will_paginate @questions %>
+      </div>
+    <% end %>
+  </div>
+</div>

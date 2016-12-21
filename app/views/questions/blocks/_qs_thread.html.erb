@@ -1,0 +1,23 @@
+<div class="am-qs-main shadow-container">
+  <div class="row">
+    <div class="am-qs-user-info col-sm-3">
+      <div>
+        <%= image_tag(@question.author.avatar.medium, class: 'img-circle')  %>
+      </div>
+      <a href="<%= user_path(@question.author) %>"><span><%= @question.author.name %></span></a>
+    </div>
+    <div class="col-sm-9">
+      <div class="am-qs-title">
+        <h2><%= link_to @question.title, question_path(@question)%></h2>
+      </div>
+      <div class="am-qs-body">
+        <p>
+          <%= @question.content %>
+        </p>
+        <div class="timestamp">
+          Posted <%= time_ago_in_words(@question.created_at) %> ago.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

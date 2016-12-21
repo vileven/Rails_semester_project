@@ -27,5 +27,16 @@ namespace :db do
       set_default_avatar(user)
       user.save!
     end
+
+
+    for user in  User.all.limit(6) do
+      50.times do
+        title = Faker::Lorem.sentence(5)
+        content = Faker::Lorem.paragraph(5)
+        user.questions.create!(title: title, content: content)
+      end
+
+    end
+
   end
 end

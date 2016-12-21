@@ -355,3 +355,33 @@ input {
   text-decoration: underline;
 }
 
+.am-user-info {
+  position: fixed;
+  text-align: center;
+  a {
+    color: $gray-dark;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.am-user-activity-qs {
+  border-top: 1px solid $gray-light;
+}
+
+.timestamp {
+  color: $gray-light;
+  font-size: 0.8em;
+}
+
+.am-user-activity-qs {
+  padding: 10px;
+}
+
+a {
+  &:hover {
+    text-decoration: none;
+    color: $gray-light;
+  }
+}

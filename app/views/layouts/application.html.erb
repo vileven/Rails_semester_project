@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <%= favicon_link_tag 'favicon.ico' %>
     <title>AskMachine | <%= yield(:title) %></title>
     <%= csrf_meta_tags %>
     <%= yield(:styles) %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -32,6 +34,7 @@
 
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right ">
+              <li><%= link_to "Questions", questions_path %></li>
               <% if signed_in? %>
                   <li> <%= link_to "Users", users_path %> </li>
                   <li class="dropdown">
@@ -59,7 +62,7 @@
               <li>
 
                 <form class="navbar-form navbar-left am-form-search" role="search">
-                  <%= link_to 'Ask', '#', class: 'am-ask-btn btn btn-default' %>
+                  <%= link_to 'Ask', new_question_path, class: 'am-ask-btn btn btn-default' %>
                   <input type="text" class="form-control header-search-input" placeholder="Search">
                   <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                 </form>

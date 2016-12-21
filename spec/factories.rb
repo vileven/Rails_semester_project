@@ -10,4 +10,11 @@ FactoryGirl.define do
   factory :admin do
     admin true
   end
+
+  factory :question do
+    title "Hello"
+    content "Lorem ipsum"
+    association :author, factory: :user
+  end
 end
+

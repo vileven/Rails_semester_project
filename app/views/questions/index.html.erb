@@ -1,0 +1,24 @@
+<% provide(:title, 'Questions') %>
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'custom/qs_index' %>
+<% end %>
+<% @questions.each do |question| %>
+    <div class="shadow-container col-md-12">
+      <div class="row">
+        <div class="am-qss-user-info col-sm-3">
+          <div>
+            <%= image_tag(question.author.avatar.medium, class: 'img-circle')  %>
+          </div>
+          <a href="<%= user_path(question.author) %>"><span><%= question.author.name %></span></a>
+        </div>
+        <div class="am-qss-body col-sm-9">
+          <h3><%= link_to question.title, question_path(question) %></h3>
+          <p><%= short_qs_content(question.content) %></p>
+          <div class="timestamp1">
+            Posted <%= time_ago_in_words(question.created_at) %> ago.
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>
+<%= will_paginate %>

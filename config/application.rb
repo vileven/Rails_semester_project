@@ -17,5 +17,7 @@ module AskMachine
     config.assets.precompile += %w( forms/file_input.js )
     config.assets.precompile += %w( custom/signup.css )
     config.assets.precompile += %w( custom/paginate.css )
+    config.assets.precompile += %w( custom/question.css )
+    config.assets.precompile += %w( custom/qs_index.css )
   end
 end

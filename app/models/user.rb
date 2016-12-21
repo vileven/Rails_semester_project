@@ -1,9 +1,8 @@
-
 class User < ApplicationRecord
   before_save { self.email = email.downcase }
   before_create :create_remember_token
 
-
+  has_many :questions, foreign_key: :author_id, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 50 }
 

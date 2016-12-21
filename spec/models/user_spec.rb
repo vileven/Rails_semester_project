@@ -17,6 +17,7 @@ describe User do
   it { should respond_to(:authenticate) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:admin) }
+  it { should respond_to(:questions) }
 
   it { should be_valid }
   it { should_not be_admin }
@@ -124,4 +125,31 @@ describe User do
     before { @user.save }
     its(:remember_token) { should_not be_blank }
   end
+
+  describe "que associations" do
+
+    before { @user.save }
+    let!(:older_question) do
+      FactoryGirl.create(:question, author: @user, created_at: 1.day.ago)
+    end
+    let!(:newer_question) do
+      FactoryGirl.create(:question, author: @user, created_at: 1.hour.ago)
+    end
+
+    it "should have the right questions in the right order" do
+      expect(@user.questions.to_a).to eq [newer_question, older_question]
+    end
+
+    it "should destroy associated questions" do
+      questions = @user.questions.to_a
+      @user.destroy
+      expect(questions).not_to be_empty
+      questions.each do |question|
+        expect(Question.where(id: question.id)).to be_empty
+      end
+    end
+  end
+
+
+
 end
