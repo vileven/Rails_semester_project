@@ -10,9 +10,10 @@
           <div class="am-answer">
             <div class="col-xs-1">
               <div class="am-answer-rating">
-                <a href="#" ><span class="glyphicon glyphicon-chevron-up"></span></a>
-                   <span><%= answer.rating %></span>
-                <a href="#" ><span class="glyphicon glyphicon-chevron-down"></span></a>
+                <%= link_to "+", like_answer_path(answer), class: 'vote', method: :put, remote: true %>
+                   <span class="votes-count"  data-id="<%= answer.id %>"><%= answer.liked_users.count %></span>
+                <%= link_to "-", dislike_answer_path(answer), class: 'vote', method: :put, remote: true %>
+
               </div>
             </div>
             <div class="am-answer-user-info col-sm-2">

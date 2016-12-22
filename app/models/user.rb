@@ -4,6 +4,8 @@ class User < ApplicationRecord
 
   has_many :questions, foreign_key: :author_id, dependent: :destroy
   has_many :answers, foreign_key: :answerer_id, dependent: :destroy
+  has_many :likes, foreign_key: :user_id, dependent: :destroy
+  has_many :liked_answers, through: :likes, source: :answer, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 50 }
 
@@ -23,6 +25,18 @@ class User < ApplicationRecord
 
   def User.encrypt(token)
     Digest::SHA1.hexdigest(token.to_s)
+  end
+
+  def likes?(answer)
+    likes.find_by(answer_id: answer.id)
+  end
+
+  def like!(answer)
+    likes.create!(answer_id: answer.id)
+  end
+
+  def dislike!(answer)
+    likes.find_by(answer_id: answer.id).destroy!
   end
 
   private

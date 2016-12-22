@@ -3,7 +3,13 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :questions, only: [:new, :create, :show, :destroy, :index]
-  resources :answers, only: [:create, :destroy]
+  resources :answers, only: [:create, :destroy] do
+    member do
+      put "like", to: "answers#like"
+      put "dislike", to: "answers#dislike"
+    end
+  end
+  resources :likes, only: [:new, :destroy]
 
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'

@@ -16,6 +16,9 @@ describe Answer do
   it { should respond_to(:question_id) }
   it { should respond_to(:question) }
   it { should respond_to(:answerer)}
+  it { should respond_to(:likes) }
+  it { should respond_to(:liked_users) }
+
 
   describe "when answerer_id is not present" do
     before { @answer.answerer_id = nil }
@@ -31,5 +34,6 @@ describe Answer do
     before { @answer.content = " " }
     it { should_not be_valid }
   end
+
 
 end

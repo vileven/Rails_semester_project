@@ -93,4 +93,4 @@ $(document).ready(function(){
             // data is already an object
             render_answer(data)
         })
-})
+});

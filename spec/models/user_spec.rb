@@ -18,6 +18,10 @@ describe User do
   it { should respond_to(:remember_token) }
   it { should respond_to(:admin) }
   it { should respond_to(:questions) }
+  it { should respond_to(:likes) }
+  it { should respond_to(:liked_answers) }
+  it { should respond_to(:likes?) }
+  it { should respond_to(:like!) }
 
   it { should be_valid }
   it { should_not be_admin }
@@ -175,6 +179,23 @@ describe User do
       answers.each do |answers|
         expect(Answer.where(id: answers.id)).to be_empty
       end
+    end
+  end
+
+  describe "likes" do
+    let(:answer) { FactoryGirl.create(:answer) }
+    before do
+      @user.save
+      @user.like!(answer)
+    end
+
+    it { should be_likes(answer) }
+    its(:liked_answers) { should include(answer) }
+    describe "and dislikes" do
+      before { @user.dislike!(answer) }
+
+      it { should_not be_likes(answer) }
+      its(:liked_answers) { should_not include(answer) }
     end
   end
 
