@@ -11,75 +11,20 @@
   </head>
 
   <body>
+    <%= form_tag root_url, method: 'get', class: 'locale', style: "float: right;" do %>
+      <%= select_tag 'set_locale', options_for_select( ['en', 'ru'], I18n.locale.to_s ) %>
+      <%= submit_tag '->' %>
+    <% end %>
 
     <!-- header -->
-      <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="header container-fluid">
-          <div class="navbar-header nav navbar-left">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <%= link_to image_tag('am_logo.png', alt: '', width: 50), root_path , class: 'navbar-brand logo', id: 'logo-nav'%>
 
-            <a class="navbar-brand"  href="<%= root_url %>">
-              <span id="brand-name">AskMachine</span>
-            </a>
-          </div>
-
-
-
-
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right ">
-              <li><%= link_to "Questions", questions_path %></li>
-              <% if signed_in? %>
-                  <li> <%= link_to "Users", users_path %> </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.name %><span class="caret"></span></a>
-                    <ul class="dropdown-menu am-user-menu">
-                      <li><%= link_to "Profile", current_user %></li>
-                      <li role="separator" class="divider"></li>
-                      <li><%= link_to "Settings", edit_user_path(current_user) %></li>
-                      <li role="separator" class="divider"></li>
-                      <li>
-                        <%= link_to "Sign out", signout_path, method: "delete" %>
-                      </li>
-                    </ul>
-                  </li>
-              <% else %>
-                  <li>
-                    <%= link_to "Log in", signin_path %>
-                  </li>
-                  <li>
-                    <%= link_to "Sign up", signup_path %>
-                  </li>
-              <% end %>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li>
-
-                <form class="navbar-form navbar-left am-form-search" role="search">
-                  <%= link_to 'Ask', new_question_path, class: 'am-ask-btn btn btn-default' %>
-                  <input type="text" class="form-control header-search-input" placeholder="Search">
-                  <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                </form>
-
-              </li>
-            </ul>
-
-          </div>
-        </div>
-
-      </nav>
+    <%= render 'shared/header' %>
 
     <!-- endheader -->
 
     <div class="container">
       <div class="row">
-        <div class="col-md-9 col-xs-9 main-content">
+        <div class="col-md-8 col-xs-9 main-content">
           <% flash.each do |key, value| %>
               <% unless key == 'notice'%>
                   <div class="alert alert-<%= key %> alert-dismissable">
@@ -96,9 +41,12 @@
 
           <%= yield %>
 
-          <%= debug(params) if Rails.env.development? %>
+          </div>
+          <div class="col-md-offset-1 col-md-3 right-menu">
+            <%= render 'shared/right_menu' %>
           </div>
         </div>
       </div>
+      <%= render 'shared/footer' %>
   </body>
 </html>

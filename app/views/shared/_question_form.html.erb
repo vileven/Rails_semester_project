@@ -16,6 +16,13 @@
         </div>
       </div>
 
+      <div class="form-group">
+        <%= f.label :tags, class: "col-sm-3 control-label"%>
+        <div class="col-sm-9 controls">
+          <%= f.text_field :tags, :class => "form-control",
+                           placeholder:"For example: #NN #Python #LinearRegression", value: "" %>
+        </div>
+      </div>
 
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-3">

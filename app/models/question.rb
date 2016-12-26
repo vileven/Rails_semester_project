@@ -3,6 +3,8 @@ class Question < ApplicationRecord
 
   has_many :answers, foreign_key: :question_id, dependent: :destroy
 
+  has_and_belongs_to_many :tags
+
   default_scope -> { order('created_at DESC') }
 
   validates :author_id, presence: true

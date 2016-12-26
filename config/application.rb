@@ -19,5 +19,10 @@ module AskMachine
     config.assets.precompile += %w( custom/paginate.css )
     config.assets.precompile += %w( custom/question.css )
     config.assets.precompile += %w( custom/qs_index.css )
+    config.assets.precompile += %w( forms/answer.js )
+
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb, yml}').to_s]
+    config.i18n.default_locale = :en
+    config.i18n.available_locales = [:en, :ru]
   end
 end

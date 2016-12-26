@@ -1,5 +1,9 @@
-<% if @question.answers.any? %>
-  <div class="am-answers shadow-container col-xs-12">
+<% if @question.answers.empty? %>
+  <div class="hidden" id="am-answers-container">
+<% else %>
+    <div id="am-answers-container">
+<% end %>
+  <div class=" shadow-container col-xs-12">
     <ul class="nav nav-tabs">
       <li class="active"><a href="#">New</a></li>
       <li><a href="#">Popular</a></li>
@@ -35,6 +39,6 @@
       <% end %>
     </div>
   </div>
-<% end %>
+</div>
 
 <%= render 'shared/answer_form' %>

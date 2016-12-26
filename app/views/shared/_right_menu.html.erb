@@ -1,0 +1,23 @@
+<div class="fixed">
+  <div class="tags">
+    <div class="tags-header">
+      <span><h2><%= t('top_tags') %></h2></span>
+    </div>
+    <div class="tags-content">
+      <% top_tags.each do |tag|%>
+          <%= link_to tag.name, tag_path(tag) %>
+      <% end %>
+    </div>
+  </div>
+
+
+
+  <div class="member-top">
+    <span><h2><%= t('top_members') %></h2></span>
+    <ul class="list-unstyled">
+      <% top_members.each do |user| %>
+        <li><%= link_to user.name, user_path(user) %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

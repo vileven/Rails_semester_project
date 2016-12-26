@@ -9,6 +9,8 @@ class AnswersController < ApplicationController
       result['user_path'] = user_path(@answer.answerer)
       result['user_name'] = @answer.answerer.name.to_s
       result['time'] = "Posted now."
+      result['like'] = like_answer_path(@answer)
+      result['dislike'] = dislike_answer_path(@answer)
       respond_to do |format|
         format.json { render json: result }
       end

@@ -13,7 +13,7 @@
   <div class="col-md-7 am-user-activity">
     <% if @user.questions.any? %>
       <div class="shadow-container am-user-activity-qss">
-          <h3>Questions (<%= @user.questions.count %>)</h3>
+          <h3><%= t('question') %> (<%= @user.questions.count %>)</h3>
             <%= render @questions %>
           <%= will_paginate @questions %>
       </div>

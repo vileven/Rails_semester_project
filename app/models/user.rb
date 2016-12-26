@@ -14,8 +14,8 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false }
 
   has_secure_password
-  validates :password, length: { minimum: 6 }
-
+  validates :password, presence: true, length: {minimum: 5, maximum: 120}, on: :create
+  validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true
 
   mount_uploader :avatar, AvatarUploader
 

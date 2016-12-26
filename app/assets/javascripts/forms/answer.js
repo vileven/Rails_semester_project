@@ -28,24 +28,34 @@ function render_answer(data) {
     col_xs_1.appendChild(user_rating);
 
     var a = document.createElement('a');
-    a.setAttribute('href', '#');
+    a.setAttribute('href', data['like']);
+    a.setAttribute('class', 'vote');
+    a.setAttribute('data-method', 'put');
+    a.setAttribute('data-remote', 'true');
+    a.setAttribute('rel', 'nofollow');
 
     var span = document.createElement('span');
-    span.setAttribute('class', 'glyphicon glyphicon-chevron-up');
+    span.textContent = '+';
 
     a.appendChild(span);
     user_rating.appendChild(a);
 
     span = document.createElement('span');
+    span.setAttribute('class', 'votes-count');
+    span.setAttribute('data-id', data['id']);
     span.textContent = data['rating'];
 
     user_rating.appendChild(span);
 
     a = document.createElement('a');
-    a.setAttribute('href', '#');
+    a.setAttribute('href', data['dislike']);
+    a.setAttribute('class', 'vote');
+    a.setAttribute('data-method', 'put');
+    a.setAttribute('data-remote', 'true');
+    a.setAttribute('rel', 'nofollow');
 
     span = document.createElement('span');
-    span.setAttribute('class', 'glyphicon glyphicon-chevron-down');
+    span.textContent = '-';
     a.appendChild(span);
     user_rating.appendChild(a);
     container.appendChild(div_row);
@@ -82,6 +92,7 @@ function render_answer(data) {
 
     container.innerHTML += buffer;
     am_answer.setAttribute('id', 'result');
+    document.getElementById('am-answers-container').setAttribute('class', '');
     location.hash = 'result';
 }
 

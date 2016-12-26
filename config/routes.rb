@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       put "dislike", to: "answers#dislike"
     end
   end
-  resources :likes, only: [:new, :destroy]
+  resources :tags, only: [:show]
 
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'

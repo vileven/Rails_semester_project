@@ -4,7 +4,10 @@ class QuestionsController < ApplicationController
 
   def create
     @question = current_user.questions.build(question_params)
+    save_tags_qs(@question)
     if @question.save
+      current_user.question_count += 1
+      current_user.save
       flash[:success] = "Question created!"
       redirect_to question_path(@question)
     else
@@ -21,6 +24,7 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @answer = Answer.new
+    p @question.tags
   end
 
   def index
@@ -39,5 +43,23 @@ class QuestionsController < ApplicationController
 
   def admin_user
     redirect_to(signin_path) unless current_user.admin?
+  end
+
+  def save_tags_qs(question)
+    params.require(:question).permit(:tags)
+    tags = params.require(:question).permit(:tags)[:tags]
+    tags = tags.sub(',', ' ')
+    tags = tags.gsub(/[^\w\s]/, "")
+    tags = tags.gsub(/\s+/, " ")
+    tags.split.each do |tag|
+      tag_ = Tag.where(name: tag)[0]
+      if tag_
+        tag_.question_count += 1
+        tag_.save!
+        question.tags << tag_
+      else
+        question.tags.build(name: tag)
+      end
+    end
   end
 end

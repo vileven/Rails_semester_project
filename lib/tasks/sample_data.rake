@@ -4,6 +4,14 @@ def set_default_avatar(user)
   end
 end
 
+tags = %w(ML PCA LDA Math MATH statistics LearningRate
+    ReinforcementLearning DeepLearning GradientDescent SVD
+    SpectralDecomposition LogisticRegression NN LinearMap
+    LinearRegression activation backpropagation AI StrongAI
+    Reduction regularization L1 L2 Ellastic kNN qNN
+    probability graphs hiddenlayers Python R NumPy Ruby TensorFlow)
+
+
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
@@ -33,7 +41,23 @@ namespace :db do
       50.times do
         title = Faker::Lorem.sentence(5)
         content = Faker::Lorem.paragraph(5)
-        user.questions.create!(title: title, content: content)
+        qs = Question.new(author: user, title: title, content: content)
+        tags_for_qs = tags.shuffle[1..rand(1..4)]
+        tags_for_qs.each do |el|
+          if Tag.where(name: el).exists?
+            tag = Tag.where(name: el)[0]
+          else
+            tag = Tag.new(name: el)
+          end
+          tag.question_count += 1
+          tag.save!
+          qs.tags << tag
+          tag
+        end
+        qs.save!
+        user.question_count += 1
+        user.save!
+        p tags_for_qs
       end
     end
 
@@ -41,7 +65,8 @@ namespace :db do
       users = User.all.limit(20).to_a
       10.times do
         content = Faker::Lorem.paragraph(5)
-        question.answers.create!(content: content, answerer: users.shuffle[0])
+        user = users.shuffle[0]
+        question.answers.create!(content: content, answerer: user)
       end
     end
   end

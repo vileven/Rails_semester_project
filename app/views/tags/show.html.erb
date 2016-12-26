@@ -1,0 +1,38 @@
+<% provide(:title, @tag.name) %>
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'custom/qs_index' %>
+    <%= stylesheet_link_tag 'custom/paginate' %>
+<% end %>
+
+<h1>#<%= @tag.name %> :  <%= @tag.question_count %> Questions</h1>
+<div class="col-md-12">
+  <%= will_paginate @questions %>
+</div>
+
+<% @questions.each do |question| %>
+    <div class="shadow-container col-md-12">
+      <div class="row">
+        <div class="am-qss-user-info col-sm-3">
+          <div>
+            <%= image_tag(question.author.avatar.medium, class: 'img-circle')  %>
+          </div>
+          <a href="<%= user_path(question.author) %>"><span><%= question.author.name %></span></a>
+        </div>
+        <div class="am-qss-body col-sm-9">
+          <% if current_user.present? && current_user.admin?  %>
+              <%= link_to "| delete", question, method: :delete,
+                          data: { confirm: "You sure?" } ,
+                          style: "float: right;"%>
+          <% end %>
+          <h3><%= link_to question.title, question_path(question) %></h3>
+          <p><%= short_qs_content(question.content) %></p>
+          <div class="timestamp1">
+            Posted <%= time_ago_in_words(question.created_at) %> ago.
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>
+<div class="col-md-12">
+  <%= will_paginate @questions %>
+</div>
