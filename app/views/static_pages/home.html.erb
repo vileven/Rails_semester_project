@@ -1,5 +1,24 @@
 <% provide(:title, 'Home') %>
-<h1>AskMachine</h1>
-<p>
-  Hello, world!
-</p>
+<div class="row">
+  <div class="col-md-offset-2 col-md-8 shadow-container" id="am-home-text">
+    <p>
+      <span class="am-brand-text"> AskMachine </span> is a community of scientists,
+      mathematicians and programmers, just like you, helping each other.
+    </p>
+  </div>
+</div>
+<% if signed_in? %>
+    <div class="col-md-offset-3 col-md-6 am-main-page-phrase">
+      <span>Ask now!</span>
+      <div>
+        <%= link_to "Ask", new_question_path , class: "btn btn-lg btn-default am-btn"%>
+      </div>
+    </div>
+<% else %>
+    <div class="col-md-offset-3 col-md-6 am-main-page-phrase">
+      <span>Join to us! It takes only one minute.</span>
+      <div>
+        <%= link_to "Sign up", signup_path , class: "btn btn-lg btn-default am-btn"%>
+      </div>
+    </div>
+<% end %>

@@ -20,3 +20,5 @@ doc/
 .secret
 
 /public/uploads/
+
+public/uploads
