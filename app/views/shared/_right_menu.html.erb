@@ -5,7 +5,9 @@
     </div>
     <div class="tags-content">
       <% top_tags.each do |tag|%>
-          <%= link_to tag.name, tag_path(tag) %>
+          <%= link_to tag_path(tag) do %>
+            <span><%= tag.name %></span>
+          <% end %>
       <% end %>
     </div>
   </div>

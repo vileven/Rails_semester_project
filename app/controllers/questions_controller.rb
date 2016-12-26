@@ -24,11 +24,15 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @answer = Answer.new
-    p @question.tags
   end
 
   def index
-    @questions = Question.paginate(page: params[:page], per_page: 20)
+    if params[:search]
+      @search = params[:search]
+      @questions = Question.search(@search).paginate(page: params[:page], per_page: 20)
+    else
+      @questions = Question.paginate(page: params[:page], per_page: 20)
+    end
   end
 
   def new
