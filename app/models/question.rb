@@ -1,7 +1,7 @@
 class Question < ApplicationRecord
   belongs_to :author, class_name: 'User'
 
-  has_many :answers, foreign_key: :question_id, dependent: :destroy, counter_cache: true
+  has_many :answers, foreign_key: :question_id, dependent: :destroy
 
   has_and_belongs_to_many :tags
 
