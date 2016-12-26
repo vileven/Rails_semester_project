@@ -62,7 +62,9 @@ class QuestionsController < ApplicationController
         tag_.save!
         question.tags << tag_
       else
-        question.tags.build(name: tag)
+        tag__ = question.tags.new(name: tag)
+        tag__.question_count += 1
+        tag__.save!
       end
     end
   end
