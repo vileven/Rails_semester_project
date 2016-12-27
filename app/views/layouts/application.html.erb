@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= favicon_link_tag 'favicon.ico' %>
     <title>AskMachine | <%= yield(:title) %></title>
     <%= csrf_meta_tags %>
@@ -42,7 +43,7 @@
           <%= yield %>
 
           </div>
-          <div class="col-md-offset-1 col-md-3 col-sm-offset-1 col-sm-3 right-menu">
+          <div class="col-md-offset-1 col-md-3  col-sm-offset-1 col-sm-3 right-menu">
             <%= render 'shared/right_menu' %>
           </div>
         </div>
