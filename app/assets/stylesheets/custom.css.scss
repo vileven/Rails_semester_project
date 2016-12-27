@@ -223,13 +223,24 @@ nav {
 }
 
 .qs-answer {
+
   margin-left: 15px;
   margin-right: 15px;
-  display: inline-block;
+  position: relative;
+  bottom: 20px;
+  left: 150px;
+
+  float: right;
+  //display: inline-block;
 }
+
+//.am-qss-body {
+//  position: relative;
+//}
 
 .qs-tags {
   display: inline-block;
+  padding-bottom: 20px;
 }
 
 .qs-tags a  span {

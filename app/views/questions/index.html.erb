@@ -24,11 +24,19 @@
           <% end %>
           <h3><%= link_to question.title, question_path(question) %></h3>
           <p><%= short_qs_content(question.content) %></p>
-          <div class="qs-answer">
-            Answers <span class="badge"><%= question.answers.count %></span>
+          <div class="qs-tags" style="display: block;">
+            <span>Tags: </span>
+            <% question.tags.each do |tag| %>
+                <%= link_to tag_path(tag) do %>
+                    <span><%= tag.name %></span>
+                <% end %>
+            <% end %>
           </div>
           <div class="timestamp1">
             Posted <%= time_ago_in_words(question.created_at) %> ago.
+          </div>
+          <div class="qs-answer">
+            Answers <span class="badge"><%= question.answers.count %></span>
           </div>
         </div>
       </div>

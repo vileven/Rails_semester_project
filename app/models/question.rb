@@ -16,7 +16,8 @@ class Question < ApplicationRecord
 
   def self.search(search)
     if search
-      Question.where('title LIKE ?', "%#{search}%")
+      # Item.where('game_name LIKE :search OR genre LIKE :search OR console LIKE :search', search: "%#{search}%")
+      Question.joins(:tags).where('title LIKE ? OR tags.name LIKE ?', "%#{search}%", "#{search}")
     else
       Question.all
     end
