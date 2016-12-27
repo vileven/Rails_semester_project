@@ -12,15 +12,21 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @questions = @user.questions.paginate(page: params[:page], per_page: 10)
-    if params[:set_locale]
-      locale = params[:set_locale].to_s.strip.to_sym
-      I18n.locale = I18n.available_locales.include?(locale) ?
-          locale :
-          I18n.default_locale
-      @locale = params[:set_locale]
+    @user = User.where(id: params[:id])[0]
+    unless @user
+      flash[:warning] = "User doesn't exist"
+      redirect_to(root_path)
+    else
+      @questions = @user.questions.paginate(page: params[:page], per_page: 10)
     end
+
+    # if params[:set_locale]
+    #   locale = params[:set_locale].to_s.strip.to_sym
+    #   I18n.locale = I18n.available_locales.include?(locale) ?
+    #       locale :
+    #       I18n.default_locale
+    #   @locale = params[:set_locale]
+    # end
   end
 
   def create
@@ -70,8 +76,13 @@ class UsersController < ApplicationController
   # Before filters
 
   def correct_user
-    @user = User.find(params[:id])
-    redirect_to(root_url) unless current_user?(@user)
+    @user = User.where(id: params[:id])[0]
+    unless @user
+      redirect_to(root_path)
+    else
+      redirect_to(root_url) unless current_user?(@user)
+    end
+
   end
 
   def admin_user

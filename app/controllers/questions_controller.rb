@@ -22,7 +22,11 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find(params[:id])
+    @question = Question.where(:id => params[:id])[0]
+    unless @question
+      flash[:warning] = "Question doesn't exist"
+      redirect_to(root_path)
+    end
     @answer = Answer.new
   end
 

@@ -22,26 +22,34 @@ class AnswersController < ApplicationController
   end
 
   def like
-    @answer = Answer.find(params[:id])
-
-    current_user.like!(@answer) unless current_user.likes?(@answer)
-
-    if request.xhr?
-      render json: { count: @answer.likes.count, id: params[:id] }
+    @answer = Answer.where(id: params[:id])[0]
+    unless @answer
+      flash[:warning] = "Answer doesn't exist"
+      redirect_to(root_path)
     else
-      redirect_to @answer.question
+      current_user.like!(@answer) unless current_user.likes?(@answer)
+
+      if request.xhr?
+        render json: { count: @answer.likes.count, id: params[:id] }
+      else
+        redirect_to @answer.question
+      end
     end
   end
 
   def dislike
-    @answer = Answer.find(params[:id])
-
-    current_user.dislike!(@answer) if current_user.likes?(@answer)
-
-    if request.xhr?
-      render json: { count: @answer.likes.count, id: params[:id] }
+    @answer = Answer.where(id: params[:id])[0]
+    unless @answer
+      flash[:warning] = "Answer doesn't exist"
+      redirect_to(root_path)
     else
-      redirect_to @answer.question
+      current_user.dislike!(@answer) unless current_user.likes?(@answer)
+
+      if request.xhr?
+        render json: { count: @answer.likes.count, id: params[:id] }
+      else
+        redirect_to @answer.question
+      end
     end
   end
 
