@@ -1,7 +1,7 @@
 <% if @question.answers.empty? %>
   <div class="hidden" id="am-answers-container">
 <% else %>
-    <div id="am-answers-container">
+    <div id="am-answers-container" style="height: 500px;">
 <% end %>
   <div class=" shadow-container col-xs-12">
     <ul class="nav nav-tabs">
@@ -20,13 +20,13 @@
 
               </div>
             </div>
-            <div class="am-answer-user-info col-sm-2">
+            <div class="am-answer-user-info col-xs-2">
               <div>
                 <%= image_tag(answer.answerer.avatar.small, class: 'img-circle')  %>
               </div>
               <a href="<%= user_path(answer.answerer) %>"><span><%= answer.answerer.name %></span></a>
             </div>
-            <div class="col-sm-9 am-answer-body">
+            <div class="col-xs-9 am-answer-body">
               <p>
                 <%= answer.content %>
               </p>
